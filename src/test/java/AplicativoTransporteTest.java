@@ -25,15 +25,16 @@ class AplicativoTransporteTest {
     @Test
     void deveCancelarCorrida() {
         Acao cancelarCorrida = new CancelarCorrida(corrida);
-        aplicativoTransporte.executarCorrida(cancelarCorrida);
+        aplicativoTransporte.cancelarCorrida(cancelarCorrida);
 
         assertEquals("Corrida Cancelada - Seu dinheiro foi estornado +R$10.0", corrida.cancelarCorrida());
     }
 
     @Test
     void confirmarCorridaAtiva() {
-        Acao cancelarCorrida = new CancelarCorrida(corrida);
-        aplicativoTransporte.executarCorrida(cancelarCorrida);
+        Acao executarCorrida = new CancelarCorrida(corrida);
+        aplicativoTransporte.executarCorrida(executarCorrida);
+        corrida.executarCorrida();
 
         assertTrue(corrida.isCorridaAtiva());
     }
@@ -42,6 +43,7 @@ class AplicativoTransporteTest {
     void confirmarCorridaNaoAtiva() {
         Acao cancelarCorrida = new CancelarCorrida(corrida);
         aplicativoTransporte.executarCorrida(cancelarCorrida);
+        corrida.cancelarCorrida();
 
         assertTrue(!corrida.isCorridaAtiva());
     }
